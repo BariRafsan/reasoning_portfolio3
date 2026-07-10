@@ -1,9 +1,3 @@
-"""Blackjack rule configurations.
-
-`BASE_RULES` is a fairly standard Vegas-strip ruleset. The RULESETS dict
-gives named variants used for Task P3.1 scenario 3 (rule-variation study).
-Feel free to add more variants here — train.py just needs a name.
-"""
 from dataclasses import dataclass
 
 
@@ -11,7 +5,7 @@ from dataclasses import dataclass
 class Rules:
     num_decks: int = 6
     dealer_hits_soft17: bool = True
-    blackjack_payout: float = 1.5      # 3:2
+    blackjack_payout: float = 1.5  # 3:2
     double_after_split: bool = True
     resplit_aces: bool = False
     hit_split_aces: bool = False

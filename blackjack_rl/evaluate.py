@@ -1,10 +1,3 @@
-"""Greedy evaluation of a trained agent + strategy-chart export.
-
-Usage:
-    python -m blackjack_rl.evaluate --agent logs/basic_mc_base_seed0.agent.pkl --episodes 2000000
-    python -m blackjack_rl.evaluate --agent logs/counting_mc_base_seed0.agent.pkl --episodes 2000000 --export-chart results/counting_chart.csv
-"""
-
 import argparse
 import csv
 import math

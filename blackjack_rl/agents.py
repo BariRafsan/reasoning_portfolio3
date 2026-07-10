@@ -1,29 +1,12 @@
-"""Learning agents. No external RL framework is used — everything here is
-plain Python/dict-based tabular RL.
+"""Learning agents."""
 
-MCAgent          - every-visit Monte Carlo control (primary algorithm).
-QLearningAgent   - tabular Q-learning, used as a comparison point in the
-                   paper ("how do different learning algorithms behave").
-                   Updates are applied once a hand resolves, sequentially
-                   over that hand's own trajectory (semi-online: action
-                   *selection* during play always uses the live Q-table,
-                   but the terminal reward of a hand is only known after
-                   dealer settlement, so the very last step's update is
-                   necessarily deferred to then). This is documented as a
-                   design simplification in the README/paper.
-BetAgent         - naive per-count contextual bandit (kept only as the
-                   documented "before" baseline: see KellyBetAgent for why
-                   it fails and what replaces it for scenario 2/4).
-EdgeModel        - online OLS regression of profit-per-unit-bet on true
-                   count; the statistical core of KellyBetAgent.
-KellyBetAgent    - regression + fractional-Kelly bet sizer used for
-                   scenario 2/4 bet sizing (replaces BetAgent).
-"""
 import random
 
 
 class BaseAgent:
-    def __init__(self, epsilon=0.15, epsilon_min=0.01, epsilon_decay=0.999999, rng=None):
+    def __init__(
+        self, epsilon=0.15, epsilon_min=0.01, epsilon_decay=0.999999, rng=None
+    ):
         self.Q = {}
         self.N = {}
         self.epsilon = epsilon
@@ -90,23 +73,17 @@ class QLearningAgent(BaseAgent):
 
 
 class BetAgent:
-    """Contextual bandit: state = true-count bucket, action = bet size
-    (in units of the table minimum bet). Learns the expected profit-per-unit
-    for each bucket via incremental averaging, then a greedy policy picks
-    the bet size maximizing expected money profit for that bucket.
 
-    Because profit-per-unit-bet is independent of the bet actually placed
-    (the cards don't care how much money is riding on them), a risk-neutral
-    EV-maximizing bettor should always bet the table max once EV(true count)
-    turns positive, and the table min otherwise -- a corner solution. This
-    is intentionally naive and is improved on in scenario 4 with a smoother
-    Kelly-style bet spread (see train.py).
-    """
-
-    def __init__(self, bet_sizes=(1, 2, 3, 4, 6, 8), epsilon=0.2, epsilon_min=0.02,
-                 epsilon_decay=0.999995, rng=None):
+    def __init__(
+        self,
+        bet_sizes=(1, 2, 3, 4, 6, 8),
+        epsilon=0.2,
+        epsilon_min=0.02,
+        epsilon_decay=0.999995,
+        rng=None,
+    ):
         self.bet_sizes = list(bet_sizes)
-        self.Q = {}   # tc_bucket -> {bet_size: avg money profit per round}
+        self.Q = {}  # tc_bucket -> {bet_size: avg money profit per round}
         self.N = {}
         self.epsilon = epsilon
         self.epsilon_min = epsilon_min
@@ -140,19 +117,6 @@ class BetAgent:
 
 
 class EdgeModel:
-    """Online ordinary-least-squares regression of realized profit-per-unit-
-    bet on the Hi-Lo true-count bucket: edge_hat(tc) = a + b*tc.
-
-    Updated from *every* hand, regardless of the bet actually placed. A
-    hand's profit-per-unit-bet doesn't depend on how much was staked, so
-    there's nothing to explore about the effect of bet size once
-    profit-per-unit is known for a given count -- estimating edge(tc) is a
-    regression problem, not a bandit problem. Pooling every hand into one
-    fit also means rare, extreme counts borrow statistical strength from
-    the whole dataset instead of relying only on their own few thousand
-    samples (see KellyBetAgent's docstring for why that distinction
-    matters).
-    """
 
     def __init__(self, min_n_for_ci=30):
         self.n = 0
@@ -189,8 +153,14 @@ class EdgeModel:
         if n < 2:
             return 1.0
         a, b = self._ols()
-        sse_over_n = (self.syy / n - 2 * a * self.sy / n - 2 * b * self.sxy / n
-                      + a * a + 2 * a * b * self.sx / n + b * b * self.sxx / n)
+        sse_over_n = (
+            self.syy / n
+            - 2 * a * self.sy / n
+            - 2 * b * self.sxy / n
+            + a * a
+            + 2 * a * b * self.sx / n
+            + b * b * self.sxx / n
+        )
         return max(sse_over_n, 1e-6)
 
     def predict(self, tc):
@@ -207,55 +177,22 @@ class EdgeModel:
         a, b = self._ols()
         resid_var = self.residual_variance()
         mean_x = self.sx / n
-        var_x = max(self.sxx / n - mean_x ** 2, 1e-9)
+        var_x = max(self.sxx / n - mean_x**2, 1e-9)
         se2 = resid_var * (1.0 / n + (tc - mean_x) ** 2 / (n * var_x))
-        return a + b * tc, se2 ** 0.5
+        return a + b * tc, se2**0.5
 
 
 class KellyBetAgent:
-    """Bet-sizing policy for scenario 2/4, replacing the naive `BetAgent`.
 
-    Why `BetAgent` fails: it treats each true-count bucket as an independent
-    multi-armed bandit and greedily argmaxes the *observed* money profit for
-    each (bucket, bet-size) pair. But money_profit = bet_size * profit_unit
-    at a fixed count -- there is nothing to discover about the effect of bet
-    size once profit-per-unit is known, so modeling this as an exploration
-    problem only adds variance. Extreme counts are also rare, so each
-    bucket's own average is estimated from only a couple thousand hands and
-    is dominated by sampling noise on the order of the true edge itself.
-    Empirically (see logs/naive_bandit_baseline/), every bucket -- including
-    the most favorable ones -- ends up looking unprofitable at every
-    positive bet size, so the greedy bettor bets the table minimum (or, once
-    a sit-out action exists, bets 0) forever, regardless of the count. That
-    is a corner solution driven by estimator noise, not a real policy.
-
-    Fix: fit a single pooled regression of profit-per-unit-bet on true count
-    (`EdgeModel`) instead of one independent estimate per bucket. Pooling
-    makes the fit at rare, extreme counts as reliable as the regression's
-    total sample size, not just as reliable as that one bucket's own hands.
-    Sit out (scenario 4 only) when the *lower confidence bound* of the
-    fitted edge is non-positive, not just its point estimate -- using a
-    confidence bound rather than the point estimate for that decision is
-    what keeps noise from producing a false "always sit out" verdict the
-    way it does for `BetAgent`.
-
-    Bet size is Kelly-*proportional* rather than the raw Kelly formula taken
-    literally: full-Kelly (edge / variance) is an optimal fraction of
-    bankroll (order 1e-3 for a Blackjack-sized edge), not a count of
-    table-minimum units, so plugging it directly into a 1..12-unit ladder
-    always underflows to the table minimum. Since the per-hand outcome
-    variance is essentially constant across true counts, the Kelly ratio
-    between any two counts collapses to the ratio of their edges -- so we
-    calibrate the top of the bet ladder to the edge at the most favorable
-    count the system can represent (true count is clipped to +6 by
-    `env.bucket_true_count`) and scale every other count's bet linearly
-    in between, which preserves Kelly's edge-proportionality while mapping
-    it onto a realistic, discrete bet spread instead of a raw bankroll
-    fraction.
-    """
-
-    def __init__(self, bet_sizes=(0, 1, 2, 4, 8, 12), reference_tc=6,
-                 kelly_fraction=1.0, wong_z=1.0, min_n_for_ci=30, rng=None):
+    def __init__(
+        self,
+        bet_sizes=(0, 1, 2, 4, 8, 12),
+        reference_tc=6,
+        kelly_fraction=1.0,
+        wong_z=1.0,
+        min_n_for_ci=30,
+        rng=None,
+    ):
         self.bet_sizes = sorted(bet_sizes)
         self.reference_tc = reference_tc
         self.kelly_fraction = kelly_fraction
@@ -291,7 +228,5 @@ class KellyBetAgent:
         pass  # bet sizes are derived analytically -- nothing to explore/decay
 
     def edge_table(self, tc_range=range(-6, 7)):
-        """Fitted edge(tc) for reporting/plotting (the paper's
-        profit-estimate-correctness check compares this against the
-        textbook Hi-Lo rule of thumb of ~+0.5% edge per +1 true count)."""
+
         return {tc: self.model.predict(tc) for tc in tc_range}

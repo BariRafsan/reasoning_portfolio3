@@ -1,12 +1,5 @@
-"""Card, shoe and hand-value primitives for the Blackjack simulator.
+"""Card, shoe and hand-value primitives for the Blackjack simulator."""
 
-A card is represented as a (rank_label, value) tuple, e.g. ('10', 10) or
-('A', 11). Grouping all ten-valued cards (10/J/Q/K) under the single rank
-label '10' is a common simplification in basic-strategy engines: it keeps
-the pair-splitting state space small (10 pair classes instead of 13) while
-still reflecting real-table play, since 10/J/Q/K are strategically
-identical in Blackjack.
-"""
 import random
 
 RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"]
@@ -14,9 +7,16 @@ RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"]
 # Hi-Lo card counting tags (Thorp-style point count), used for scenarios
 # that involve the "Complete Point-Count System".
 HI_LO_TAGS = {
-    "2": 1, "3": 1, "4": 1, "5": 1, "6": 1,
-    "7": 0, "8": 0, "9": 0,
-    "10": -1, "A": -1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": -1,
+    "A": -1,
 }
 
 
@@ -36,14 +36,6 @@ def hand_value(values):
 
 
 class Shoe:
-    """A multi-deck shoe with Hi-Lo running count tracking.
-
-    Card visibility to the counting system is caller-controlled via
-    `reveal()` — this matters because a dealer's hole card must not affect
-    the running count until it is actually turned over, otherwise the
-    learned policy would be conditioning on information it could not see
-    at decision time.
-    """
 
     def __init__(self, num_decks=6, penetration=0.75, rng=None):
         self.num_decks = num_decks
