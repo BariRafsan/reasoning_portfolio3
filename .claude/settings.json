@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /home/k73548/reasoning_portfolio/blackjack_rl /home/k73548/reasoning_portfolio/logs /home/k73548/reasoning_portfolio/results)",
+      "Bash(python3 -c \"import sys; print\\(sys.version\\)\")",
+      "Bash(python3 -m blackjack_rl.train --scenario basic --algo mc --episodes 20000 --log-every 5000 --out-dir /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs)",
+      "Bash(python3 -m blackjack_rl.train --scenario counting --algo mc --episodes 20000 --log-every 5000 --out-dir /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs)",
+      "Bash(python3 -m blackjack_rl.train --scenario improved --algo qlearning --episodes 20000 --log-every 5000 --out-dir /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs)",
+      "Bash(python3 -m blackjack_rl.evaluate --agent /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs/basic_mc_base_seed0.agent.pkl --episodes 20000 --export-chart /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs/basic_chart.csv)",
+      "Bash(python3 -m blackjack_rl.train --scenario basic --ruleset dealer_stands_soft17 --algo mc --episodes 20000 --log-every 10000 --out-dir /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs)",
+      "Bash(time python3 -m blackjack_rl.train --scenario basic --algo mc --episodes 500000 --log-every 100000 --seed 1 --out-dir /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs)",
+      "Bash(time python3 -m blackjack_rl.train --scenario basic --algo mc --episodes 5000000 --log-every 1000000 --seed 2 --out-dir /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs)",
+      "Bash(python3 -m blackjack_rl.evaluate --agent /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs/basic_mc_base_seed2.agent.pkl --episodes 2000000 --seed 999)",
+      "Bash(python3 -m blackjack_rl.evaluate --agent /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs/basic_mc_base_seed2.agent.pkl --episodes 1 --export-chart /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs/chart5m.csv)",
+      "Bash(python3 -)",
+      "Bash(python3 -m blackjack_rl.evaluate --agent /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs/basic_mc_base_seed2.agent.pkl --episodes 2 --export-chart /tmp/claude-1072/-home-k73548-reasoning-portfolio/bd5c7d6d-fda9-4107-9fd1-1672c1ba0ed1/scratchpad/logs/chart5m.csv)",
+      "Bash(python3 -c ' *)",
+      "Bash(time python3 -m blackjack_rl.train --scenario improved --algo mc --episodes 6000000 --log-every 1000000 --seed 42 --out-dir /tmp/smoketest)",
+      "Bash(python3 -m blackjack_rl.train --scenario counting --algo mc --episodes 6000000 --log-every 2000000 --seed 42 --out-dir /tmp/smoketest)",
+      "Bash(python3 -m blackjack_rl.train --scenario counting --algo mc --episodes 6000000 --log-every 3000000 --seed 42 --out-dir /tmp/smoketest)",
+      "Bash(python3 -m blackjack_rl.train --scenario improved --algo mc --episodes 6000000 --log-every 3000000 --seed 42 --out-dir /tmp/smoketest)",
+      "Bash(python3 paper/analysis.py)",
+      "Bash(poetry --version)",
+      "Bash(sort -u -t: -k2)",
+      "Bash(poetry check *)",
+      "Bash(poetry install *)",
+      "Bash(poetry run *)",
+      "Bash(rm -rf /tmp/poetry_smoketest)",
+      "WebSearch",
+      "Bash(tectonic paper/paper.tex)",
+      "Bash(pdfinfo paper/paper.pdf)",
+      "Bash(pdftoppm -png -r 100 paper/paper.pdf /tmp/claude-1000/-home-rafsan-rl-reasoning-portfolio/d13febbb-1189-4b16-8315-fcb6e5b3e463/scratchpad/paper_pages/page)"
+    ],
+    "additionalDirectories": [
+      "/home/k73548/reasoning_portfolio"
+    ]
+  }
+}

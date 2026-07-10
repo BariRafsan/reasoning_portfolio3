@@ -1,0 +1,607 @@
+{
+  "runs": {
+    "basic_mc_base_seed0": {
+      "scenario": "basic",
+      "algo": "mc",
+      "ruleset": "base",
+      "trained_episodes": 15000000,
+      "mean_profit_per_hand": -0.01281025,
+      "ci95": 0.0015704955835775102,
+      "mean_profit_per_100": -1.281025,
+      "learned_states": 360,
+      "learned_state_actions": 1160,
+      "theoretical_states": 350,
+      "theoretical_state_actions": 1750,
+      "coverage_frac": 1.0285714285714285,
+      "low_visit_states": 0,
+      "low_visit_frac": 0.0
+    },
+    "basic_qlearning_base_seed0": {
+      "scenario": "basic",
+      "algo": "qlearning",
+      "ruleset": "base",
+      "trained_episodes": 15000000,
+      "mean_profit_per_hand": -0.04083875,
+      "ci95": 0.0014071222336139418,
+      "mean_profit_per_100": -4.083875,
+      "learned_states": 360,
+      "learned_state_actions": 1160,
+      "theoretical_states": 350,
+      "theoretical_state_actions": 1750,
+      "coverage_frac": 1.0285714285714285,
+      "low_visit_states": 360,
+      "low_visit_frac": 1.0
+    },
+    "counting_mc_base_seed0": {
+      "scenario": "counting",
+      "algo": "mc",
+      "ruleset": "base",
+      "trained_episodes": 25000000,
+      "mean_profit_per_hand": -0.019213,
+      "ci95": 0.0015458320275173346,
+      "mean_profit_per_100": -1.9213,
+      "learned_states": 4680,
+      "learned_state_actions": 15073,
+      "theoretical_states": 4550,
+      "theoretical_state_actions": 22750,
+      "coverage_frac": 1.0285714285714285,
+      "low_visit_states": 0,
+      "low_visit_frac": 0.0
+    },
+    "counting_qlearning_base_seed0": {
+      "scenario": "counting",
+      "algo": "qlearning",
+      "ruleset": "base",
+      "trained_episodes": 25000000,
+      "mean_profit_per_hand": -0.04036525,
+      "ci95": 0.0014153997834368307,
+      "mean_profit_per_100": -4.036525,
+      "learned_states": 4680,
+      "learned_state_actions": 15076,
+      "theoretical_states": 4550,
+      "theoretical_state_actions": 22750,
+      "coverage_frac": 1.0285714285714285,
+      "low_visit_states": 4680,
+      "low_visit_frac": 1.0
+    },
+    "basic_mc_dealer_stands_soft17_seed0": {
+      "scenario": "basic",
+      "algo": "mc",
+      "ruleset": "dealer_stands_soft17",
+      "trained_episodes": 15000000,
+      "mean_profit_per_hand": -0.0100475,
+      "ci95": 0.0015863234922036886,
+      "mean_profit_per_100": -1.0047499999999998,
+      "learned_states": 360,
+      "learned_state_actions": 1160,
+      "theoretical_states": 350,
+      "theoretical_state_actions": 1750,
+      "coverage_frac": 1.0285714285714285,
+      "low_visit_states": 0,
+      "low_visit_frac": 0.0
+    },
+    "counting_mc_blackjack_6to5_seed0": {
+      "scenario": "counting",
+      "algo": "mc",
+      "ruleset": "blackjack_6to5",
+      "trained_episodes": 25000000,
+      "mean_profit_per_hand": -0.032782900000000004,
+      "ci95": 0.0015224538325978173,
+      "mean_profit_per_100": -3.27829,
+      "learned_states": 4680,
+      "learned_state_actions": 15073,
+      "theoretical_states": 4550,
+      "theoretical_state_actions": 22750,
+      "coverage_frac": 1.0285714285714285,
+      "low_visit_states": 0,
+      "low_visit_frac": 0.0
+    },
+    "improved_mc_base_seed0": {
+      "scenario": "improved",
+      "algo": "mc",
+      "ruleset": "base",
+      "trained_episodes": 25000000,
+      "mean_profit_per_hand": 0.0,
+      "ci95": 0.0,
+      "mean_profit_per_100": 0.0,
+      "learned_states": 4665,
+      "learned_state_actions": 14942,
+      "theoretical_states": 4550,
+      "theoretical_state_actions": 22750,
+      "coverage_frac": 1.0252747252747252,
+      "low_visit_states": 2047,
+      "low_visit_frac": 0.43879957127545555
+    },
+    "improved_qlearning_base_seed0": {
+      "scenario": "improved",
+      "algo": "qlearning",
+      "ruleset": "base",
+      "trained_episodes": 25000000,
+      "mean_profit_per_hand": 0.0,
+      "ci95": 0.0,
+      "mean_profit_per_100": 0.0,
+      "learned_states": 4664,
+      "learned_state_actions": 14954,
+      "theoretical_states": 4550,
+      "theoretical_state_actions": 22750,
+      "coverage_frac": 1.025054945054945,
+      "low_visit_states": 4664,
+      "low_visit_frac": 1.0
+    }
+  },
+  "space": {},
+  "chart_diffs": {
+    "basic_vs_dealer_stands_soft17": [
+      {
+        "state": [
+          "hard",
+          "12",
+          "4",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "hard",
+          "6",
+          "5",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "hard",
+          "6",
+          "6",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "hard",
+          "9",
+          "3",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "hard",
+          "9",
+          "6",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "pair",
+          "2",
+          "5",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "pair",
+          "2",
+          "6",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "2",
+          "8",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "2",
+          "9",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "3",
+          "3",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "3",
+          "5",
+          ""
+        ],
+        "base_action": "STAND",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "4",
+          "4",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "pair",
+          "4",
+          "5",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "pair",
+          "4",
+          "6",
+          ""
+        ],
+        "base_action": "DOUBLE",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "pair",
+          "4",
+          "8",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "4",
+          "9",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "5",
+          "3",
+          ""
+        ],
+        "base_action": "DOUBLE",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "pair",
+          "5",
+          "7",
+          ""
+        ],
+        "base_action": "DOUBLE",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "pair",
+          "5",
+          "8",
+          ""
+        ],
+        "base_action": "DOUBLE",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "pair",
+          "6",
+          "5",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "pair",
+          "6",
+          "7",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "pair",
+          "6",
+          "8",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "6",
+          "9",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "7",
+          "2",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "pair",
+          "7",
+          "5",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "pair",
+          "7",
+          "6",
+          ""
+        ],
+        "base_action": "STAND",
+        "variant_action": "SPLIT"
+      },
+      {
+        "state": [
+          "pair",
+          "8",
+          "3",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "pair",
+          "9",
+          "11",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "pair",
+          "9",
+          "3",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "pair",
+          "9",
+          "6",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "pair",
+          "A",
+          "5",
+          ""
+        ],
+        "base_action": "SPLIT",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "soft",
+          "13",
+          "3",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "soft",
+          "13",
+          "5",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "soft",
+          "13",
+          "6",
+          ""
+        ],
+        "base_action": "DOUBLE",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "soft",
+          "16",
+          "3",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "soft",
+          "16",
+          "4",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "soft",
+          "16",
+          "6",
+          ""
+        ],
+        "base_action": "DOUBLE",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "soft",
+          "17",
+          "5",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "soft",
+          "18",
+          "10",
+          ""
+        ],
+        "base_action": "STAND",
+        "variant_action": "HIT"
+      },
+      {
+        "state": [
+          "soft",
+          "18",
+          "11",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "STAND"
+      },
+      {
+        "state": [
+          "soft",
+          "18",
+          "5",
+          ""
+        ],
+        "base_action": "STAND",
+        "variant_action": "DOUBLE"
+      },
+      {
+        "state": [
+          "soft",
+          "18",
+          "8",
+          ""
+        ],
+        "base_action": "HIT",
+        "variant_action": "STAND"
+      }
+    ],
+    "counting_vs_blackjack_6to5": []
+  },
+  "thorp_check": {
+    "agree": 154,
+    "total": 160,
+    "agree_frac": 0.9625,
+    "mismatches": [
+      {
+        "hard_total": 9,
+        "dealer_upcard": 3,
+        "thorp": "DOUBLE",
+        "learned": "HIT",
+        "visits": 49165
+      },
+      {
+        "hard_total": 9,
+        "dealer_upcard": 4,
+        "thorp": "DOUBLE",
+        "learned": "HIT",
+        "visits": 49298
+      },
+      {
+        "hard_total": 9,
+        "dealer_upcard": 6,
+        "thorp": "DOUBLE",
+        "learned": "HIT",
+        "visits": 46797
+      },
+      {
+        "hard_total": 12,
+        "dealer_upcard": 3,
+        "thorp": "HIT",
+        "learned": "STAND",
+        "visits": 122713
+      },
+      {
+        "hard_total": 12,
+        "dealer_upcard": 4,
+        "thorp": "STAND",
+        "learned": "HIT",
+        "visits": 118920
+      },
+      {
+        "hard_total": 16,
+        "dealer_upcard": 10,
+        "thorp": "HIT",
+        "learned": "STAND",
+        "visits": 518475
+      }
+    ]
+  }
+}

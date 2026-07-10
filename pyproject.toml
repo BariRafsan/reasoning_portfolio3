@@ -1,0 +1,27 @@
+[project]
+name = "blackjack-rl"
+version = "0.1.0"
+description = "Portfolio Exam 3: from-scratch (no external RL framework) reinforcement-learning Blackjack player."
+requires-python = ">=3.9,<4.0"
+authors = []
+# Core RL implementation (blackjack_rl/*) is standard library only, as
+# required by the assignment ("Do not use an external Reinforcement
+# Learning framework") -- no runtime dependency is needed to train or
+# evaluate agents.
+dependencies = []
+
+[tool.poetry]
+packages = [{ include = "blackjack_rl" }]
+
+[tool.poetry.group.paper]
+optional = true
+
+[tool.poetry.group.paper.dependencies]
+# Only needed to run paper/analysis.py (greedy-eval report + figures for
+# the P3.2 paper); not required for Task P3.1's training/evaluation.
+matplotlib = "^3.8"
+numpy = "^1.26"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
